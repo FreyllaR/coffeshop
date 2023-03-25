@@ -5,13 +5,9 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -25,6 +21,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     ImageButton homebtn, favour, basket, profile;
     ImageView homeview, favourview, basketview, profileview;
+    Button Dessert;
+    ImageView esp, kap, kakao, lat;
 
     ActivityResultLauncher<Intent> startFavouriteActivityForResult = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
@@ -104,6 +102,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         favourview.setVisibility(View.INVISIBLE);
         basketview.setVisibility(View.INVISIBLE);
         profileview.setVisibility(View.INVISIBLE);
+        Dessert = binding.dessert;
+        Dessert.setOnClickListener(this);
+        esp = binding.imageView13;
+        kap = binding.imageView14;
+        kakao = binding.imageView15;
+        lat = binding.imageView16;
     }
 
     @Override
@@ -121,6 +125,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent4 = new Intent(this, ProfileActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startProfileActivityForResult.launch(intent4);
                 break;
+            case R.id.dessert:
+                Intent intent5 = new Intent(this, MainActivity2.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                startProfileActivityForResult.launch(intent5);
+                esp.setVisibility(View.INVISIBLE);
+                kap.setVisibility(View.INVISIBLE);
+                kakao.setVisibility(View.INVISIBLE);
+                lat.setVisibility(View.INVISIBLE);
         }
     }
 }
