@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">CoffeeIN</string>
     <string name="todo">TODO</string>
+    <string name="Amerika">Американо</string>
 </resources>
