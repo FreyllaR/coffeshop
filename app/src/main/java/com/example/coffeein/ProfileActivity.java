@@ -6,25 +6,24 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
-import com.example.coffeein.databinding.ActivityMainBinding;
+import com.example.coffeein.databinding.ActivityProfileBinding;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private ActivityMainBinding binding;
+public class ProfileActivity extends AppCompatActivity implements View.OnClickListener{
+
+    private ActivityProfileBinding binding;
 
     ImageButton homebtn, favour, basket, profile;
+
     ImageView homeview, favourview, basketview, profileview;
+
 
     ActivityResultLauncher<Intent> startFavouriteActivityForResult = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
@@ -64,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
     );
 
-    ActivityResultLauncher<Intent> startProfileActivityForResult = registerForActivityResult(
+    ActivityResultLauncher<Intent> startMainActivityForResult = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
                 @Override
                 public void onActivityResult(ActivityResult result) {
@@ -86,24 +85,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        binding = ActivityProfileBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         homebtn = binding.imageButton;
         favour = binding.imageButton2;
         basket = binding.imageButton3;
         profile = binding.imageButton4;
-        homeview = binding.imageView9;
-        favourview = binding.imageView10;
-        basketview = binding.imageView11;
-        profileview = binding.imageView12;
         homebtn.setOnClickListener(this);
         favour.setOnClickListener(this);
         basket.setOnClickListener(this);
         profile.setOnClickListener(this);
-        homeview.setVisibility(View.VISIBLE);
+        homeview = binding.imageView9;
+        favourview = binding.imageView10;
+        basketview = binding.imageView11;
+        profileview = binding.imageView12;
+        homeview.setVisibility(View.INVISIBLE);
         favourview.setVisibility(View.INVISIBLE);
         basketview.setVisibility(View.INVISIBLE);
-        profileview.setVisibility(View.INVISIBLE);
+        profileview.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -117,9 +116,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent3 = new Intent(this, BasketActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startBasketActivityForResult.launch(intent3);
                 break;
-            case R.id.imageButton4:
-                Intent intent4 = new Intent(this, ProfileActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                startProfileActivityForResult.launch(intent4);
+            case R.id.imageButton:
+                Intent intent4 = new Intent(this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                startMainActivityForResult.launch(intent4);
                 break;
         }
     }
