@@ -8,8 +8,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
@@ -20,10 +22,13 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     private ActivityProfileBinding binding;
 
+    Button BSelectImage;
+
     ImageButton homebtn, favour, basket, profile;
 
-    ImageView homeview, favourview, basketview, profileview;
+    ImageView homeview, favourview, basketview, profileview, IVPreviewImage;
 
+    int SELECT_PICTURE = 200;
 
     ActivityResultLauncher<Intent> startFavouriteActivityForResult = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
@@ -103,6 +108,35 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         favourview.setVisibility(View.INVISIBLE);
         basketview.setVisibility(View.INVISIBLE);
         profileview.setVisibility(View.VISIBLE);
+        BSelectImage = binding.BSelectImage;
+        IVPreviewImage = binding.IVPreviewImage;
+
+        BSelectImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                imageChooser();
+            }
+        });
+    }
+
+    void imageChooser() {
+        Intent i = new Intent();
+        i.setType("image/*");
+        i.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(i, "Select Picture"), SELECT_PICTURE);
+    }
+
+    public void onActivityResult(int  requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK){
+            if (requestCode == SELECT_PICTURE){
+                Uri selectedImageUri = data.getData();
+                if (null != selectedImageUri){
+                    IVPreviewImage.setImageURI(selectedImageUri);
+                }
+            }
+        }
     }
 
     @Override
@@ -122,4 +156,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 break;
         }
     }
+
+
+
 }
