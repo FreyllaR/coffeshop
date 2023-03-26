@@ -17,7 +17,7 @@ public class SplashScreen extends AppCompatActivity {
             public void run() {
                 try {
                     super.run();
-                    sleep(2400);  //Delay of 10 seconds
+                    sleep(1800);  //Delay of 10 seconds
                 } catch (Exception e) {
 
                 } finally {

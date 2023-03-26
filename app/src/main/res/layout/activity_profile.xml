@@ -138,34 +138,34 @@
 
     <Button
         android:id="@+id/BSelectImage"
-        android:layout_width="119dp"
-        android:layout_height="110dp"
+        android:layout_width="124dp"
+        android:layout_height="48dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="93dp"
-        android:background="@drawable/roundedbutton"
         android:backgroundTint="#201919"
-        android:text="SELECT IMAGE"
+        android:text="Сменить фото"
         android:textColor="@android:color/white"
-        android:textSize="18sp"
+        android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.472"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView12"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="0.217"
         tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/IVPreviewImage"
-        android:layout_width="169dp"
-        android:layout_height="131dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_below="@id/BSelectImage"
+        android:background="@drawable/img"
         app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.462"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.243"
+        app:layout_constraintVertical_bias="0.161"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -205,6 +205,7 @@
         android:layout_marginEnd="175dp"
         android:ems="10"
         android:inputType="textPersonName"
+        android:minHeight="48dp"
         android:text="Тут будет ваше имя!"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
