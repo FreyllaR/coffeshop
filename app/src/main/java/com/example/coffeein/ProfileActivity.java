@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
@@ -17,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.coffeein.databinding.ActivityProfileBinding;
 
@@ -123,7 +125,29 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 imageChooser();
             }
         });
+        loadText();
+    }
 
+    SharedPreferences sPref;
+    final String keyName = "olkov_kirill_olegovich";
+
+    private void saveText(){
+        sPref = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor editor = sPref.edit();
+        editor.putString(keyName, personname.getText().toString());
+        editor.apply();
+    }
+
+    private void loadText(){
+        sPref = getPreferences(MODE_PRIVATE);
+        String savedText = sPref.getString(keyName, "");
+        personname.setText(savedText);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        saveText();
     }
 
     void imageChooser() {
@@ -152,14 +176,23 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.imageButton2:
                 Intent intent2 = new Intent(this, FavouriteActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startFavouriteActivityForResult.launch(intent2);
+                intent2.putExtra("Name", personname.getText().toString());
+                setResult(RESULT_OK, intent2);
+                finish();
                 break;
             case R.id.imageButton3:
                 Intent intent3 = new Intent(this, BasketActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startBasketActivityForResult.launch(intent3);
+                intent3.putExtra("Name", personname.getText().toString());
+                setResult(RESULT_OK, intent3);
+                finish();
                 break;
             case R.id.imageButton:
                 Intent intent4 = new Intent(this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startMainActivityForResult.launch(intent4);
+                intent4.putExtra("Name", personname.getText().toString());
+                setResult(RESULT_OK, intent4);
+                finish();
                 break;
         }
     }
