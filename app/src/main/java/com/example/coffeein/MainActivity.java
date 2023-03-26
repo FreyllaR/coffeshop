@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ImageButton homebtn, favour, basket, profile;
     ImageView homeview, favourview, basketview, profileview;
     Button Dessert;
-    ImageView esp, kap, kakao, lat;
+    ImageView esp, kap, kakao, lat, americ;
 
     ActivityResultLauncher<Intent> startFavouriteActivityForResult = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
@@ -108,6 +108,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         kap = binding.imageView14;
         kakao = binding.imageView15;
         lat = binding.imageView16;
+        americ = binding.imageView17;
     }
 
     @Override
@@ -128,10 +129,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.dessert:
                 Intent intent5 = new Intent(this, MainActivity2.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startProfileActivityForResult.launch(intent5);
-                esp.setVisibility(View.INVISIBLE);
-                kap.setVisibility(View.INVISIBLE);
-                kakao.setVisibility(View.INVISIBLE);
-                lat.setVisibility(View.INVISIBLE);
         }
     }
 }
