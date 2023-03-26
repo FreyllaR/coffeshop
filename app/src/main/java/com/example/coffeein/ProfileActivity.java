@@ -14,6 +14,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
@@ -29,6 +30,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     ImageButton homebtn, favour, basket, profile;
 
     ImageView homeview, favourview, basketview, profileview, IVPreviewImage;
+
+    EditText personname;
 
     int SELECT_PICTURE = 200;
 
@@ -112,6 +115,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         profileview.setVisibility(View.VISIBLE);
         BSelectImage = binding.BSelectImage;
         IVPreviewImage = binding.IVPreviewImage;
+        personname = binding.editTextTextPersonName;
 
         BSelectImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,6 +123,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 imageChooser();
             }
         });
+
     }
 
     void imageChooser() {

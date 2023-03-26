@@ -159,7 +159,6 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_below="@id/BSelectImage"
-        android:background="@drawable/img"
         app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -172,9 +171,9 @@
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="19dp"
-        android:layout_marginStart="154dp"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="154dp"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginEnd="150dp"
         android:layout_marginBottom="43dp"
         android:text="ВАШ ПРОФИЛЬ"
         app:layout_constraintBottom_toTopOf="@+id/IVPreviewImage"
@@ -206,11 +205,12 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        android:text="Тут будет ваше имя!"
+        android:text="Введите имя"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.518" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
