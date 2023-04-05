@@ -6,6 +6,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -27,7 +28,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     private ActivityProfileBinding binding;
 
-    Button BSelectImage;
+    Button BSelectImage, saveProf;
 
     ImageButton homebtn, favour, basket, profile;
 
@@ -118,6 +119,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         BSelectImage = binding.BSelectImage;
         IVPreviewImage = binding.IVPreviewImage;
         personname = binding.editTextTextPersonName;
+        saveProf = binding.saveProf;
 
         BSelectImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,29 +127,19 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 imageChooser();
             }
         });
-        loadText();
+        loadProfdata();
+        loadNumbData();
     }
 
     SharedPreferences sPref;
-    final String keyName = "olkov_kirill_olegovich";
-
-    private void saveText(){
-        sPref = getPreferences(MODE_PRIVATE);
-        SharedPreferences.Editor editor = sPref.edit();
-        editor.putString(keyName, personname.getText().toString());
-        editor.apply();
-    }
-
-    private void loadText(){
-        sPref = getPreferences(MODE_PRIVATE);
-        String savedText = sPref.getString(keyName, "");
-        personname.setText(savedText);
-    }
+    final String keyName = "1234567890";
+    final String SAVED_TEXT = "Alen";
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        saveText();
+        saveProfData();
+        saveNumbData();
     }
 
     void imageChooser() {
@@ -170,6 +162,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -194,8 +187,40 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 setResult(RESULT_OK, intent4);
                 finish();
                 break;
+            case R.id.saveProf:
+                saveProfData();
+                saveNumbData();
+                break;
+
         }
     }
+
+    private void saveNumbData() {
+        sPref = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor editor = sPref.edit();
+        editor.putString(keyName, personname.getText().toString());
+        editor.apply();
+    }
+
+    private void loadNumbData(){
+        sPref = getPreferences(MODE_PRIVATE);
+        String savedText = sPref.getString(keyName, "");
+        personname.setText(savedText);
+    }
+
+    private void saveProfData() {
+        sPref = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor editor = sPref.edit();
+        editor.putString(SAVED_TEXT, personname.getText().toString());
+        editor.apply();
+    }
+
+    private void loadProfdata(){
+        sPref = getPreferences(MODE_PRIVATE);
+        String savedText = sPref.getString(SAVED_TEXT, "");
+        personname.setText(savedText);
+    }
+
 
 
 

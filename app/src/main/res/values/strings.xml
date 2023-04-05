@@ -2,4 +2,7 @@
     <string name="app_name">CoffeeIN</string>
     <string name="todo">TODO</string>
     <string name="Amerika">Американо</string>
+    <string name="number">Ваш номер телефона</string>
+    <string name="_7">+7</string>
+    <string name="saveProf">Сохранить</string>
 </resources>
