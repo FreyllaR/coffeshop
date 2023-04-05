@@ -103,6 +103,7 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
         profileview.setVisibility(View.INVISIBLE);
         Coffee = binding.coffee;
         Coffee.setOnClickListener(this);
+        setTitle("Меню");
     }
 
     @Override

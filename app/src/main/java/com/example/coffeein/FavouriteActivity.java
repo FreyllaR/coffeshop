@@ -4,24 +4,36 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.gms.maps.*;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.coffeein.databinding.ActivityFavouriteBinding;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
-public class FavouriteActivity extends AppCompatActivity implements View.OnClickListener {
+public class FavouriteActivity extends AppCompatActivity implements View.OnClickListener, OnMapReadyCallback {
 
     private ActivityFavouriteBinding binding;
 
     ImageButton homebtn, favour, basket, profile;
+    
+    MapView googlemap;
 
     ImageView homeview, favourview, basketview, profileview;
+
+    MapView googleMap;
 
     ActivityResultLauncher<Intent> startMainActivityForResult = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
@@ -97,10 +109,37 @@ public class FavouriteActivity extends AppCompatActivity implements View.OnClick
         favourview = binding.imageView10;
         basketview = binding.imageView11;
         profileview = binding.imageView12;
+        googlemap = binding.mapView3;
         homeview.setVisibility(View.INVISIBLE);
         favourview.setVisibility(View.VISIBLE);
         basketview.setVisibility(View.INVISIBLE);
         profileview.setVisibility(View.INVISIBLE);
+        setTitle("Карта");
+        createMapView();
+    }
+
+    private void createMapView(){
+        /**
+         * Catch the null pointer exception that
+         * may be thrown when initialising the map
+         */
+        try {
+            if(null == googleMap){
+                ((MapFragment) getFragmentManager().findFragmentById(
+                        R.id.mapView3)).getMapAsync(this);
+
+                /**
+                 * If the map is still null after attempted initialisation,
+                 * show an error to the user
+                 */
+                if(null == googleMap) {
+                    Toast.makeText(getApplicationContext(),
+                            "Error creating map",Toast.LENGTH_SHORT).show();
+                }
+            }
+        } catch (NullPointerException exception){
+            Log.e("mapApp", exception.toString());
+        }
     }
 
     public void onClick(View v) {
@@ -118,5 +157,10 @@ public class FavouriteActivity extends AppCompatActivity implements View.OnClick
                 startProfileActivityForResult.launch(intent4);
                 break;
         }
+    }
+
+    @Override
+    public void onMapReady(@NonNull GoogleMap googleMap) {
+
     }
 }

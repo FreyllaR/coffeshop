@@ -109,6 +109,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         kakao = binding.imageView15;
         lat = binding.imageView16;
         americ = binding.imageView17;
+        setTitle("Меню");
     }
 
     @Override

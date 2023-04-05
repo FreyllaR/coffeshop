@@ -102,6 +102,7 @@ public class BasketActivity extends AppCompatActivity implements View.OnClickLis
         favourview.setVisibility(View.INVISIBLE);
         basketview.setVisibility(View.VISIBLE);
         profileview.setVisibility(View.INVISIBLE);
+        setTitle("Корзина");
     }
 
     @Override
