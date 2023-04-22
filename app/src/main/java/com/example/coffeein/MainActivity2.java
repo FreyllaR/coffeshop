@@ -7,15 +7,26 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 
 import com.example.coffeein.databinding.ActivityMain2Binding;
 
-public class MainActivity2 extends AppCompatActivity implements View.OnClickListener {
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class MainActivity2 extends AppCompatActivity implements View.OnClickListener, Serializable {
+
+
+    static ArrayList<Product> products = new ArrayList<Product>();
+
+    static ArrayList<Serializable> ready_products = new ArrayList<Serializable>();
 
     private ActivityMain2Binding binding;
 
@@ -23,62 +34,22 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
     ImageView homeview, favourview, basketview, profileview;
     Button Coffee;
 
-    ActivityResultLauncher<Intent> startFavouriteActivityForResult = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    if(result.getResultCode() == Activity.RESULT_OK){
-                        Intent intent = result.getData();
-                        if(intent != null){
-                            String name = intent.getStringExtra("Name");
-                            //binding.textView3.setText(name);
-                        }
-                    }
-                    else{
-                        String textError = "Error!";
-                        //binding.textView3.setText(textError);
-                    }
-                }
-            }
-    );
+    BoxAdapter2 boxAdapter2;
 
-    ActivityResultLauncher<Intent> startBasketActivityForResult = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    if(result.getResultCode() == Activity.RESULT_OK){
-                        Intent intent = result.getData();
-                        if(intent != null){
-                            String name = intent.getStringExtra("Name");
-                            //binding.textView3.setText(name);
-                        }
-                    }
-                    else{
-                        String textError = "Error!";
-                        //binding.textView3.setText(textError);
-                    }
-                }
-            }
-    );
 
-    ActivityResultLauncher<Intent> startProfileActivityForResult = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    if(result.getResultCode() == Activity.RESULT_OK){
-                        Intent intent = result.getData();
-                        if(intent != null){
-                            String name = intent.getStringExtra("Name");
-                            //binding.textView3.setText(name);
-                        }
-                    }
-                    else{
-                        String textError = "Error!";
-                        //binding.textView3.setText(textError);
-                    }
-                }
-            }
-    );
+    ListView lvMain2;
+
+    Button btn2;
+
+
+    String [] notes = {"Чизкейк Нью-Йорк", "Печенье", "Пончик", "Кофейная прага", "Макарони"};
+
+    int[] myImageList = new int[]{R.drawable.chizkeik, R.drawable.pechenie, R.drawable.ponchik, R.drawable.tortchoko, R.drawable.pachkabutslad};
+
+    int[] price = {200, 400, 100, 250, 150};
+
+
+    private static ArrayList<Integer> checked = new ArrayList<>(Arrays.asList(6));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +74,10 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
         profileview.setVisibility(View.INVISIBLE);
         Coffee = binding.coffee;
         Coffee.setOnClickListener(this);
+        fillData();
+        boxAdapter2 = new BoxAdapter2(this, products);
+        lvMain2 = binding.lvMain2;
+        lvMain2.setAdapter(boxAdapter2);
         setTitle("Меню");
     }
 
@@ -111,19 +86,46 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
         switch (v.getId()) {
             case R.id.imageButton2:
                 Intent intent2 = new Intent(this, FavouriteActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                startFavouriteActivityForResult.launch(intent2);
+                startActivity(intent2);
                 break;
             case R.id.imageButton3:
                 Intent intent3 = new Intent(this, BasketActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                startBasketActivityForResult.launch(intent3);
+                intent3.putExtra("Items2", check());
+                intent3.putExtra("Items", MainActivity.check());
+                startActivity(intent3);
                 break;
             case R.id.imageButton4:
                 Intent intent4 = new Intent(this, ProfileActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                startProfileActivityForResult.launch(intent4);
+                startActivity(intent4);
                 break;
             case R.id.coffee:
                 Intent intent5 = new Intent(this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                startProfileActivityForResult.launch(intent5);
+                startActivity(intent5);
+                break;
         }
     }
+
+    public static void onPress(int id) {
+        checked.add(id);
+    }
+
+    public static ArrayList<Serializable> check(){
+        int i = 0;
+        while(i != products.size()){
+            for(int q = 0; q < checked.size(); q++) {
+                if (checked.get(q) == i) {
+                    ready_products.add(products.get(i));
+                }
+            }
+            i++;
+        }
+        return ready_products;
+    }
+
+    void fillData(){
+        for(int i = 0; i < 5; i++){
+            products.add(new Product(notes[i], price[i],  myImageList[i], btn2));
+        }
+    }
+
 }

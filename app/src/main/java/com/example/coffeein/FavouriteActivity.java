@@ -35,63 +35,6 @@ public class FavouriteActivity extends AppCompatActivity implements View.OnClick
 
     MapView googleMap;
 
-    ActivityResultLauncher<Intent> startMainActivityForResult = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    if(result.getResultCode() == Activity.RESULT_OK){
-                        Intent intent = result.getData();
-                        if(intent != null){
-                            String name = intent.getStringExtra("Name");
-                            //binding.textView3.setText(name);
-                        }
-                    }
-                    else{
-                        String textError = "Error!";
-                        //binding.textView3.setText(textError);
-                    }
-                }
-            }
-    );
-
-    ActivityResultLauncher<Intent> startBasketActivityForResult = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    if(result.getResultCode() == Activity.RESULT_OK){
-                        Intent intent = result.getData();
-                        if(intent != null){
-                            String name = intent.getStringExtra("Name");
-                            //binding.textView3.setText(name);
-                        }
-                    }
-                    else{
-                        String textError = "Error!";
-                        //binding.textView3.setText(textError);
-                    }
-                }
-            }
-    );
-
-    ActivityResultLauncher<Intent> startProfileActivityForResult = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    if(result.getResultCode() == Activity.RESULT_OK){
-                        Intent intent = result.getData();
-                        if(intent != null){
-                            String name = intent.getStringExtra("Name");
-                            //binding.textView3.setText(name);
-                        }
-                    }
-                    else{
-                        String textError = "Error!";
-                        //binding.textView3.setText(textError);
-                    }
-                }
-            }
-    );
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -146,15 +89,15 @@ public class FavouriteActivity extends AppCompatActivity implements View.OnClick
         switch (v.getId()) {
             case R.id.imageButton:
                 Intent intent2 = new Intent(this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                startMainActivityForResult.launch(intent2);
+                startActivity(intent2);
                 break;
             case R.id.imageButton3:
                 Intent intent3 = new Intent(this, BasketActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                startBasketActivityForResult.launch(intent3);
+                startActivity(intent3);
                 break;
             case R.id.imageButton4:
                 Intent intent4 = new Intent(this, ProfileActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                startProfileActivityForResult.launch(intent4);
+                startActivity(intent4);
                 break;
         }
     }

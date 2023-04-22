@@ -10,10 +10,15 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 
 import com.example.coffeein.databinding.ActivityBasketBinding;
+
+import java.io.Serializable;
+import java.util.ArrayList;
 
 public class BasketActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -22,6 +27,16 @@ public class BasketActivity extends AppCompatActivity implements View.OnClickLis
     ImageButton homebtn, favour, basket, profile;
 
     ImageView homeview, favourview, basketview, profileview;
+
+    ListView lvBasket, lvBasket2;
+
+    ArrayList<Product> products_coffee = new ArrayList<>();
+
+    ArrayList<Product> products_dessert = new ArrayList<>();
+    BoxAdapter boxAdapter;
+
+    BoxAdapter2 boxAdapter2;
+
 
 
     ActivityResultLauncher<Intent> startFavouriteActivityForResult = registerForActivityResult(
@@ -102,6 +117,23 @@ public class BasketActivity extends AppCompatActivity implements View.OnClickLis
         favourview.setVisibility(View.INVISIBLE);
         basketview.setVisibility(View.VISIBLE);
         profileview.setVisibility(View.INVISIBLE);
+
+        Intent intent = getIntent();
+
+        lvBasket = binding.lvBasket;
+        lvBasket2 = binding.lvBasket2;
+
+        products_coffee = (ArrayList<Product>) intent.getSerializableExtra("Items");
+        products_dessert = (ArrayList<Product>) intent.getSerializableExtra("Items2");
+
+        if(products_coffee.size() != 0) {
+            boxAdapter = new BoxAdapter(this, products_coffee);
+            lvBasket.setAdapter(boxAdapter);
+        }
+        if(products_dessert.size() != 0){
+            boxAdapter2 = new BoxAdapter2(this, products_dessert);
+            lvBasket2.setAdapter(boxAdapter2);
+        }
         setTitle("Корзина");
     }
 
@@ -110,7 +142,7 @@ public class BasketActivity extends AppCompatActivity implements View.OnClickLis
         switch (v.getId()) {
             case R.id.imageButton2:
                 Intent intent2 = new Intent(this, FavouriteActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                startFavouriteActivityForResult.launch(intent2);
+                startActivity(intent2);
                 homeview.setVisibility(View.INVISIBLE);
                 favourview.setVisibility(View.VISIBLE);
                 basketview.setVisibility(View.INVISIBLE);
@@ -118,7 +150,7 @@ public class BasketActivity extends AppCompatActivity implements View.OnClickLis
                 break;
             case R.id.imageButton:
                 Intent intent3 = new Intent(this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                startMainActivityForResult.launch(intent3);
+                startActivity(intent3);
                 homeview.setVisibility(View.VISIBLE);
                 favourview.setVisibility(View.INVISIBLE);
                 basketview.setVisibility(View.INVISIBLE);
@@ -126,7 +158,7 @@ public class BasketActivity extends AppCompatActivity implements View.OnClickLis
                 break;
             case R.id.imageButton4:
                 Intent intent4 = new Intent(this, ProfileActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                startProfileActivityForResult.launch(intent4);
+                startActivity(intent4);
                 homeview.setVisibility(View.INVISIBLE);
                 favourview.setVisibility(View.INVISIBLE);
                 basketview.setVisibility(View.INVISIBLE);
