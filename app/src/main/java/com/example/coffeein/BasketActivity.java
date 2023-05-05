@@ -10,14 +10,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.example.coffeein.databinding.ActivityBasketBinding;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 public class BasketActivity extends AppCompatActivity implements View.OnClickListener{
@@ -141,7 +139,7 @@ public class BasketActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.imageButton2:
-                Intent intent2 = new Intent(this, FavouriteActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                Intent intent2 = new Intent(this, MapActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(intent2);
                 homeview.setVisibility(View.INVISIBLE);
                 favourview.setVisibility(View.VISIBLE);
