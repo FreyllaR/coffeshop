@@ -23,7 +23,7 @@ public class MapActivity extends AppCompatActivity {
         setContentView(R.layout.activity_map);
         mapview = findViewById(R.id.mapView3);
         mapview.getMap();
-        setTitle("Карта");
+        setTitle("Кофейни");
     }
     
 }

@@ -12,6 +12,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.Camera;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -24,12 +25,12 @@ import android.widget.Toast;
 
 import com.example.coffeein.databinding.ActivityProfileBinding;
 
+import java.io.FileOutputStream;
+
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener{
 
     private ActivityProfileBinding binding;
-
-    Button BSelectImage;
 
     ImageButton homebtn, favour, basket, profile;
 
@@ -38,65 +39,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     EditText personname, number;
 
     SharedPreferences prefs;
-
-    int SELECT_PICTURE = 200;
-
-    ActivityResultLauncher<Intent> startFavouriteActivityForResult = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    if(result.getResultCode() == Activity.RESULT_OK){
-                        Intent intent = result.getData();
-                        if(intent != null){
-                            String name = intent.getStringExtra("Name");
-                            //binding.textView3.setText(name);
-                        }
-                    }
-                    else{
-                        String textError = "Error!";
-                        //binding.textView3.setText(textError);
-                    }
-                }
-            }
-    );
-
-    ActivityResultLauncher<Intent> startBasketActivityForResult = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    if(result.getResultCode() == Activity.RESULT_OK){
-                        Intent intent = result.getData();
-                        if(intent != null){
-                            String name = intent.getStringExtra("Name");
-                            //binding.textView3.setText(name);
-                        }
-                    }
-                    else{
-                        String textError = "Error!";
-                        //binding.textView3.setText(textError);
-                    }
-                }
-            }
-    );
-
-    ActivityResultLauncher<Intent> startMainActivityForResult = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    if(result.getResultCode() == Activity.RESULT_OK){
-                        Intent intent = result.getData();
-                        if(intent != null){
-                            String name = intent.getStringExtra("Name");
-                            //binding.textView3.setText(name);
-                        }
-                    }
-                    else{
-                        String textError = "Error!";
-                        //binding.textView3.setText(textError);
-                    }
-                }
-            }
-    );
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,18 +61,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         favourview.setVisibility(View.INVISIBLE);
         basketview.setVisibility(View.INVISIBLE);
         profileview.setVisibility(View.VISIBLE);
-        BSelectImage = binding.BSelectImage;
-        IVPreviewImage = binding.IVPreviewImage;
         personname = binding.editTextTextPersonName;
         number = binding.editTextPhone;
         prefs = this.getSharedPreferences("com.example.coffeein", Context.MODE_PRIVATE);
-
-        BSelectImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                imageChooser();
-            }
-        });
         setTitle("Профиль");
     }
 
@@ -148,27 +81,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         number.setText(prefs.getString("nam", ""));
     }
 
-    void imageChooser() {
-        Intent i = new Intent();
-        i.setType("image/*");
-        i.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(i, "Select Picture"), SELECT_PICTURE);
-    }
-
-    public void onActivityResult(int  requestCode, int resultCode, Intent data){
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (resultCode == RESULT_OK){
-            if (requestCode == SELECT_PICTURE){
-                Uri selectedImageUri = data.getData();
-                if (null != selectedImageUri){
-                    IVPreviewImage.setImageURI(selectedImageUri);
-                }
-            }
-        }
-    }
-
-    @Override
+        @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.imageButton2:

@@ -35,65 +35,6 @@ public class BasketActivity extends AppCompatActivity implements View.OnClickLis
 
     BoxAdapter2 boxAdapter2;
 
-
-
-    ActivityResultLauncher<Intent> startFavouriteActivityForResult = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    if(result.getResultCode() == Activity.RESULT_OK){
-                        Intent intent = result.getData();
-                        if(intent != null){
-                            String name = intent.getStringExtra("Name");
-                            //binding.textView3.setText(name);
-                        }
-                    }
-                    else{
-                        String textError = "Error!";
-                        //binding.textView3.setText(textError);
-                    }
-                }
-            }
-    );
-
-    ActivityResultLauncher<Intent> startMainActivityForResult = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    if(result.getResultCode() == Activity.RESULT_OK){
-                        Intent intent = result.getData();
-                        if(intent != null){
-                            String name = intent.getStringExtra("Name");
-                            //binding.textView3.setText(name);
-                        }
-                    }
-                    else{
-                        String textError = "Error!";
-                        //binding.textView3.setText(textError);
-                    }
-                }
-            }
-    );
-
-    ActivityResultLauncher<Intent> startProfileActivityForResult = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    if(result.getResultCode() == Activity.RESULT_OK){
-                        Intent intent = result.getData();
-                        if(intent != null){
-                            String name = intent.getStringExtra("Name");
-                            //binding.textView3.setText(name);
-                        }
-                    }
-                    else{
-                        String textError = "Error!";
-                        //binding.textView3.setText(textError);
-                    }
-                }
-            }
-    );
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
