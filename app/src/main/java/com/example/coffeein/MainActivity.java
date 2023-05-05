@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         profileview.setVisibility(View.INVISIBLE);
         Dessert = binding.dessert;
         Dessert.setOnClickListener(this);
+        products.clear();
         fillData();
         boxAdapter = new BoxAdapter(this, products);
         lvMain = binding.lvMain;
@@ -109,6 +110,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public static ArrayList<Serializable> check(){
         int i = 0;
+        ready_products.clear();
         while(i != products.size()){
             for(int q = 0; q < checked.size(); q++) {
                 if (checked.get(q) == i) {

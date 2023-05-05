@@ -30,6 +30,8 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
 
     private ActivityMain2Binding binding;
 
+    boolean flag = true;
+
     ImageButton homebtn, favour, basket, profile;
     ImageView homeview, favourview, basketview, profileview;
     Button Coffee;
@@ -74,6 +76,7 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
         profileview.setVisibility(View.INVISIBLE);
         Coffee = binding.coffee;
         Coffee.setOnClickListener(this);
+        products.clear();
         fillData();
         boxAdapter2 = new BoxAdapter2(this, products);
         lvMain2 = binding.lvMain2;
@@ -111,6 +114,7 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
 
     public static ArrayList<Serializable> check(){
         int i = 0;
+        ready_products.clear();
         while(i != products.size()){
             for(int q = 0; q < checked.size(); q++) {
                 if (checked.get(q) == i) {

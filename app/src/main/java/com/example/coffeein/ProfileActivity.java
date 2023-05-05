@@ -173,24 +173,15 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         switch (v.getId()) {
             case R.id.imageButton2:
                 Intent intent2 = new Intent(this, FavouriteActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                startFavouriteActivityForResult.launch(intent2);
-                intent2.putExtra("Name", personname.getText().toString());
-                setResult(RESULT_OK, intent2);
-                finish();
+                startActivity(intent2);
                 break;
             case R.id.imageButton3:
                 Intent intent3 = new Intent(this, BasketActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                startBasketActivityForResult.launch(intent3);
-                intent3.putExtra("Name", personname.getText().toString());
-                setResult(RESULT_OK, intent3);
-                finish();
+                startActivity(intent3);
                 break;
             case R.id.imageButton:
                 Intent intent4 = new Intent(this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                startMainActivityForResult.launch(intent4);
-                intent4.putExtra("Name", personname.getText().toString());
-                setResult(RESULT_OK, intent4);
-                finish();
+                startActivity(intent4);
                 break;
 
         }
