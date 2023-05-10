@@ -1,18 +1,17 @@
 package com.example.coffeein;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.coffeein.databinding.ActivityBasketBinding;
 
@@ -24,17 +23,19 @@ public class BasketActivity extends AppCompatActivity implements View.OnClickLis
 
     ImageButton homebtn, favour, basket, profile;
 
+    Button paybut;
+
     ImageView homeview, favourview, basketview, profileview;
 
-    ListView lvBasket, lvBasket2;
+    ListView lvBasket;
 
     ArrayList<Product> products_coffee = new ArrayList<>();
 
     ArrayList<Product> products_dessert = new ArrayList<>();
+
+
+    ArrayList<Product> common_products = new ArrayList<>();
     BoxAdapter boxAdapter;
-
-    BoxAdapter2 boxAdapter2;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +45,8 @@ public class BasketActivity extends AppCompatActivity implements View.OnClickLis
         favour = binding.imageButton2;
         basket = binding.imageButton3;
         profile = binding.imageButton4;
+        paybut = binding.paybutton;
+        paybut.setOnClickListener(this);
         homebtn.setOnClickListener(this);
         favour.setOnClickListener(this);
         basket.setOnClickListener(this);
@@ -60,20 +63,55 @@ public class BasketActivity extends AppCompatActivity implements View.OnClickLis
         Intent intent = getIntent();
 
         lvBasket = binding.lvBasket;
-        lvBasket2 = binding.lvBasket2;
 
         products_coffee = (ArrayList<Product>) intent.getSerializableExtra("Items");
         products_dessert = (ArrayList<Product>) intent.getSerializableExtra("Items2");
 
+        for(int i = 0; i < products_coffee.size(); i++){
+            common_products.add(products_coffee.get(i));
+        }
+
+        for(int i = 0; i < products_dessert.size(); i++){
+            common_products.add(products_dessert.get(i));
+        }
+
+
         if(products_coffee.size() != 0) {
-            boxAdapter = new BoxAdapter(this, products_coffee);
+            boxAdapter = new BoxAdapter(this, common_products);
             lvBasket.setAdapter(boxAdapter);
         }
-        if(products_dessert.size() != 0){
-            boxAdapter2 = new BoxAdapter2(this, products_dessert);
-            lvBasket2.setAdapter(boxAdapter2);
+
+        if(products_coffee.size() == 0 && products_dessert.size() == 0){
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    "Корзина пуста", Toast.LENGTH_LONG);
+            toast.show();
+            paybut.setClickable(false);
+        }else{
+            paybut.setClickable(true);
         }
         setTitle("Корзина");
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.mymenu, menu);
+        return true;
+    }
+
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if(id == R.id.clean){
+           lvBasket.setAdapter(null);
+           products_dessert.clear();
+           products_coffee.clear();
+           common_products.clear();
+           MainActivity.CleanUp();
+           MainActivity2.CleanUp();
+            paybut.setClickable(false);
+        }else{
+            paybut.setClickable(true);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -102,6 +140,11 @@ public class BasketActivity extends AppCompatActivity implements View.OnClickLis
                 favourview.setVisibility(View.INVISIBLE);
                 basketview.setVisibility(View.INVISIBLE);
                 profileview.setVisibility(View.VISIBLE);
+                break;
+            case R.id.paybutton:
+                Intent intent5 = new Intent(this, PaymentActivity.class);
+                intent5.putExtra("Cmps", common_products);
+                startActivity(intent5);
                 break;
         }
     }

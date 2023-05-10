@@ -79,6 +79,11 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
         setTitle("Меню");
     }
 
+    public static void CleanUp(){
+        checked.clear();
+        ready_products.clear();
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
