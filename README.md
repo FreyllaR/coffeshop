@@ -10,7 +10,7 @@ We also have a tab with desserts nearby
 
 <img src="https://github.com/FreyllaR/coffeshop/assets/91470277/70214de3-4b14-4292-8977-f3c348ba956f" width="300" height="600">
 
-Our application also has a map of coffee shops, so far it's empty :)
+Our application also has a map of coffee shops, so far it's empty 
 
 <img src="https://github.com/FreyllaR/coffeshop/assets/91470277/78dcfb1a-5588-4c53-a9e5-95f1c7738e4c" width="300" height="600">
 
@@ -25,3 +25,5 @@ After pressing the payment button, we get to the waiting screen where you will s
 The application also has a profile setting
      
 <img src="https://github.com/FreyllaR/coffeshop/assets/91470277/9285b4cf-cd52-4f93-9277-99438516316f" width="300" height="600">
+
+Thanks for watching :)
