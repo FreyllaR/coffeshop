@@ -1,6 +1,6 @@
 When launching the application, we see the boot screen
 
-<img src="https://github.com/FreyllaR/coffeshop/assets/91470277/5622bf0a-109a-46a2-9857-c0f55e516261" width="250" height="450">
+<img src="https://github.com/FreyllaR/coffeshop/assets/91470277/5622bf0a-109a-46a2-9857-c0f55e516261" width="200" height="450">
 
 Next we get to the main screen where you can choose coffee
 ![IMG_20230527_124815](https://github.com/FreyllaR/coffeshop/assets/91470277/e6845c9e-8c83-4d76-8e03-df48ef8dc21d)
