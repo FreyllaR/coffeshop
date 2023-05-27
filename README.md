@@ -15,6 +15,8 @@ Our application also has a map of coffee shops, so far it's empty :)
 <img src="https://github.com/FreyllaR/coffeshop/assets/91470277/78dcfb1a-5588-4c53-a9e5-95f1c7738e4c" width="300" height="600"
 
 We still made an order, it is displayed in the shopping cart
+     
+<img src="https://github.com/FreyllaR/coffeshop/assets/91470277/78dcfb1a-5588-4c53-a9e5-95f1c7738e4c" width="300" height="600"
 
 <img src="https://github.com/FreyllaR/coffeshop/assets/91470277/ecb28b41-e7da-4c79-b848-cf8b6b816dee" width="300" height="600"
 
