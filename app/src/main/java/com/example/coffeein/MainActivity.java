@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent5 = new Intent(this, MainActivity2.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(intent5);
                 break;
-        }
+        } 
     }
 
 

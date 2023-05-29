@@ -25,9 +25,6 @@ public class PaymentActivity extends AppCompatActivity {
 
     ListView lvBasket;
 
-    int max = 1000;
-    int min = 100;
-
     TextView txt;
 
     @Override
@@ -38,10 +35,7 @@ public class PaymentActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
-        setTitle("Оплата");
-        txt = binding.textView2;
-        String tmp = String.valueOf((int) ((Math.random() * ( max - min )) + min));
-        txt.setText(tmp);
+        setTitle("Заказ");
         Intent intent = getIntent();
         lvBasket = binding.lvBasket;
         common_products = (ArrayList<Product>) intent.getSerializableExtra("Cmps");
