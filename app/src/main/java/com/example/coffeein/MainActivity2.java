@@ -43,7 +43,7 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
 
     int[] myImageList = new int[]{R.drawable.chizkeik, R.drawable.pechenie, R.drawable.ponchik, R.drawable.tortchoko, R.drawable.pachkabutslad};
 
-    int[] price = {200, 400, 100, 250, 150};
+    int[] price = {99, 199, 69, 199, 89};
 
 
     private static ArrayList<Integer> checked = new ArrayList<>(Arrays.asList(6));
