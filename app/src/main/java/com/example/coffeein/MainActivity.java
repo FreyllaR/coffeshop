@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     int[] myImageList = new int[]{R.drawable.ekspres, R.drawable.amerika, R.drawable.kapp, R.drawable.latt, R.drawable.kaka};
 
-    int[] price = {180, 200, 200, 250, 150};
+    int[] price = {89, 119, 169, 169, 159};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

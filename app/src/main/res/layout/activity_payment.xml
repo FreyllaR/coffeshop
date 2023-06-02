@@ -25,14 +25,14 @@
 
     <ImageView
         android:id="@+id/readyimg"
-        android:layout_width="382dp"
-        android:layout_height="216dp"
+        android:layout_width="350dp"
+        android:layout_height="190dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.008"
-        app:srcCompat="@drawable/kassa_second" />
+        app:layout_constraintVertical_bias="0.001"
+        app:srcCompat="@drawable/kassa_tree1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
